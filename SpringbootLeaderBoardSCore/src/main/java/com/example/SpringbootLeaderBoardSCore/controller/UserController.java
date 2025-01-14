@@ -32,20 +32,20 @@ public class UserController {
         this.userServiece = userServiece;
     }
 
-    @GetMapping("/users")
+    @GetMapping()
     public ResponseEntity<List<User>> getRegisterUsers() {
         return ResponseEntity.ok(userServiece.getAllUsersByScore());
 
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public ResponseEntity<User> newRegisterUser(@Valid @RequestBody User u) {
 
         User register = userServiece.createUser(u);
         return ResponseEntity.ok(register);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<User> getAllDetails(@PathVariable String userId) {
 
         Optional<User> u = userServiece.getUserById(userId);
@@ -56,7 +56,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<User> updateScore(@PathVariable String userId, @RequestBody @Valid int score) {
         User u = userServiece.updateUser(score, userId);
         if (u != null) {
@@ -65,7 +65,7 @@ public class UserController {
         return new ResponseEntity<>(u, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<User> deleteUsers(@PathVariable String userId) {
         userServiece.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

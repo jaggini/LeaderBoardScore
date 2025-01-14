@@ -2,20 +2,14 @@ package com.example.SpringbootLeaderBoardSCore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.assertNull;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.SpringbootLeaderBoardSCore.controller.UserController;
 import com.example.SpringbootLeaderBoardSCore.entity.Badge;
 import com.example.SpringbootLeaderBoardSCore.entity.User;
-import com.example.SpringbootLeaderBoardSCore.serviece.UserServieceImple;
 
 @SpringBootTest
 class SpringbootLeaderBoardSCoreApplicationTests {
@@ -26,16 +20,12 @@ class SpringbootLeaderBoardSCoreApplicationTests {
     // @BeforeEach
     // public void setUp() {
     //     UserServieceImple userServiece = new UserServieceImple();
-
     //     userController = new UserController(userServiece);
-
     // }
-
-
     @Test
     public void testCreateUser() {
-        
-        User u = new User(0, "1", "Dinga", new HashSet<>());
+
+        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
         User user = userController.newRegisterUser(u).getBody();
         assertNotNull(user);
         assertEquals("Dinga", user.getUsername());
@@ -46,7 +36,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     public void testgetUserById() {
-        User user = new User(50, "2", "Raju", new HashSet<>());
+        User user = new User(30, "2", "Raju", Badge.CODE_NINJA);
         userController.newRegisterUser(user);
         User u = userController.getAllDetails("1").getBody();
         assertNotNull(u);
@@ -56,7 +46,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     public void testSortingByScore() {
-        User u = new User(0, "1", "Dinga", new HashSet<>());
+        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
         userController.newRegisterUser(u);
         User user = userController.updateScore("1", 50).getBody();
         assertNotNull(user);
@@ -65,7 +55,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     void testDeleteUser() {
-        User u = new User(0, "1", "Dinga", new HashSet<>());
+        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
         userController.newRegisterUser(u);
         userController.deleteUsers("1");
         User delete = userController.getAllDetails("1").getBody();

@@ -22,14 +22,15 @@ public class User {
     private String username;
     @Min(value = 0)
     @Max(value = 100)
-    private int score = 0;
+    private int score;
     private Set<Badge> badges = new HashSet<>();
 
-    public User(int score, String userId, String username, Set<Badge> badges) {
+    public User(int score, String userId, String username, Badge badges) {
         this.score = score;
         this.userId = userId;
         this.username = username;
-        this.badges = badges;
+        this.badges = new HashSet<>();
+
     }
 
     public User() {

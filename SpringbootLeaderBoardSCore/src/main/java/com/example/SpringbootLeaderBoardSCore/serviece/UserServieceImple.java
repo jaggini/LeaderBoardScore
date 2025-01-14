@@ -3,15 +3,15 @@ package com.example.SpringbootLeaderBoardSCore.serviece;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
-import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.SpringbootLeaderBoardSCore.entity.Badge;
 import com.example.SpringbootLeaderBoardSCore.entity.User;
-
 import com.example.SpringbootLeaderBoardSCore.repository.UserRepository;
 
 @Service
@@ -32,15 +32,16 @@ public class UserServieceImple implements UserServiece {
     public User createUser(User u) {
         u.setUserId(u.getUserId());
         u.setUsername(u.getUsername());
-        u.setBadges(new HashSet<>());
+        u.setScore(u.getScore());
+        u.setBadges(setBadges(u.getScore()));
         return userRepository.save(u);
     }
 
     @Override
     public void deleteUser(String userId) {
-        if (!userRepository.existsById(userId)) {
-            throw new RuntimeException("user not found");
-        }
+        // if (!userRepository.existsById(userId)) {
+        //     throw new RuntimeException("user not found");
+        // }
         userRepository.deleteById(userId);
 
     }
