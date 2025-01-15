@@ -38,11 +38,11 @@ public class UserServieceImple implements UserServiece {
     }
 
     @Override
-    public void deleteUser(String userId) {
+    public void deleteUser(User u) {
         // if (!userRepository.existsById(userId)) {
         //     throw new RuntimeException("user not found");
         // }
-        userRepository.deleteById(userId);
+        userRepository.delete(u);
 
     }
 

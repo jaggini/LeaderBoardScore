@@ -1,6 +1,7 @@
 package com.example.SpringbootLeaderBoardSCore.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateScore(@PathVariable String userId, @RequestBody @Valid int score) {
+    public ResponseEntity<User> updateScore(@PathVariable String userId, @PathVariable int score) {
         User u = userServiece.updateUser(score, userId);
         if (u != null) {
             return ResponseEntity.ok(u);
@@ -66,8 +67,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<User> deleteUsers(@PathVariable String userId) {
-        userServiece.deleteUser(userId);
+    public ResponseEntity<User> deleteUsers(@RequestBody User u) {
+        userServiece.deleteUser(u);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }

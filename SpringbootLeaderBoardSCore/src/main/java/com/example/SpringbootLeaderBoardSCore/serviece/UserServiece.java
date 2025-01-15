@@ -13,7 +13,9 @@ public interface UserServiece {
 
     public User updateUser(int score, String userId);
 
-    public void deleteUser(String useriId);
+    public void deleteUser(User u);
+
+    
 
     public Optional<User> getUserById(String userId);
 

@@ -57,7 +57,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
     void testDeleteUser() {
         User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
         userController.newRegisterUser(u);
-        userController.deleteUsers("1");
+        userController.deleteUsers(u);
         User delete = userController.getAllDetails("1").getBody();
         assertNull(delete);
 
