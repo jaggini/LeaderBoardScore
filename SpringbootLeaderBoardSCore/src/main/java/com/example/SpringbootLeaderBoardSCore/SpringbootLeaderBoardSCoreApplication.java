@@ -9,8 +9,6 @@ public class SpringbootLeaderBoardSCoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootLeaderBoardSCoreApplication.class, args);
     }
-
-  
 }
 
 

@@ -1,5 +1,7 @@
 package com.example.SpringbootLeaderBoardSCore;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.SpringbootLeaderBoardSCore.controller.UserController;
 import com.example.SpringbootLeaderBoardSCore.entity.Badge;
+
 import com.example.SpringbootLeaderBoardSCore.entity.User;
 
 @SpringBootTest
@@ -25,7 +28,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
     @Test
     public void testCreateUser() {
 
-        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
+        User u = new User(50, "1", "Dinga", new ArrayList<>());
         User user = userController.newRegisterUser(u).getBody();
         assertNotNull(user);
         assertEquals("Dinga", user.getUsername());
@@ -36,7 +39,8 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     public void testgetUserById() {
-        User user = new User(30, "2", "Raju", Badge.CODE_NINJA);
+        User user = new User(30, "2", "Raju", new ArrayList<>());
+
         userController.newRegisterUser(user);
         User u = userController.getAllDetails("1").getBody();
         assertNotNull(u);
@@ -46,7 +50,7 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     public void testSortingByScore() {
-        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
+        User u = new User(50, "1", "Dinga", new ArrayList<>());
         userController.newRegisterUser(u);
         User user = userController.updateScore("1", 50).getBody();
         assertNotNull(user);
@@ -55,7 +59,8 @@ class SpringbootLeaderBoardSCoreApplicationTests {
 
     @Test
     void testDeleteUser() {
-        User u = new User(50, "1", "Dinga", Badge.CODE_CHAMP);
+        User u = new User(50, "1", "Dinga", new ArrayList<>())
+        ;
         userController.newRegisterUser(u);
         userController.deleteUsers(u);
         User delete = userController.getAllDetails("1").getBody();

@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> updateScore(@PathVariable String userId, @PathVariable int score) {
+    public ResponseEntity<User> updateScore(@PathVariable int score, @PathVariable String userId) {
         User u = userServiece.updateUser(score, userId);
         if (u != null) {
             return ResponseEntity.ok(u);
@@ -67,9 +67,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<User> deleteUsers(@RequestBody User u) {
+    public String deleteUsers(@RequestBody User u) {
         userServiece.deleteUser(u);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return "success";
 
     }
 

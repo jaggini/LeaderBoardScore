@@ -1,11 +1,11 @@
 package com.example.SpringbootLeaderBoardSCore.serviece;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
+// import java.util.ArrayList;
+// import java.util.HashSet;
+// import java.util.List;
+// import java.util.NoSuchElementException;
+// import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +42,11 @@ public class UserServieceImple implements UserServiece {
         // if (!userRepository.existsById(userId)) {
         //     throw new RuntimeException("user not found");
         // }
-        userRepository.delete(u);
+        if (userRepository.existsById(u.getUserId())) {
+
+            userRepository.deleteById(u.getUserId());
+        }
+        //return "fail";
 
     }
 
@@ -52,26 +56,24 @@ public class UserServieceImple implements UserServiece {
             throw new IllegalArgumentException("Score can not ne negative");
         }
         User u = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
-        u.setScore(score);
-
+        u.setScore(u.getScore());
         u.setBadges(setBadges(score));
-
         return userRepository.save(u);
 
     }
 
-    public Set<Badge> setBadges(int score) {
+    public List<String> setBadges(int score) {
 
-        Set<Badge> badge = new HashSet<>();
+        List<String> badge = new ArrayList<>();
         if (score >= 1 && score <= 30) {
-            badge.add(Badge.CODE_NINJA);
+            badge.add("Code Ninja");
 
         }
         if (score >= 30 && score <= 60) {
-            badge.add(Badge.CODE_CHAMP);
+            badge.add("Code Champ");
         }
         if (score >= 60 && score <= 100) {
-            badge.add(Badge.CODE_MASTER);
+            badge.add("Code Master");
 
         }
         return badge;

@@ -1,7 +1,7 @@
 package com.example.SpringbootLeaderBoardSCore.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+// import java.util.HashSet;
+import java.util.*;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,14 +22,14 @@ public class User {
     private String username;
     @Min(value = 0)
     @Max(value = 100)
-    private int score;
-    private Set<Badge> badges = new HashSet<>();
+    private int score; 
+    private List<String>  badges = new ArrayList<>();
 
-    public User(int score, String userId, String username, Badge badges) {
+    public User(int score, String userId, String username, List<String> badges) {
         this.score = score;
         this.userId = userId;
         this.username = username;
-        this.badges = new HashSet<>();
+        this.badges = badges;
 
     }
 
@@ -60,12 +60,15 @@ public class User {
     public void setScore(int score) {
         this.score = score;
     }
+  
 
-    public Set<Badge> getBadges() {
+    
+    public  List<String> getBadges() {
         return badges;
     }
-
-    public void setBadges(Set<Badge> badges) {
+ 
+         
+    public void setBadges( List<String> badges) {
         this.badges = badges;
     }
 

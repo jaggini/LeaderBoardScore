@@ -15,8 +15,6 @@ public interface UserServiece {
 
     public void deleteUser(User u);
 
-    
-
     public Optional<User> getUserById(String userId);
 
 }
